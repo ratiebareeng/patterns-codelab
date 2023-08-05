@@ -32,14 +32,22 @@ class DocumentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// The metadata getter method returns a record, which is assigned to the local variable
+    /// metadataRecord. Records are a light and easy way to return multiple values from a single
+    /// function call and assign them to a variable.
+    final metadataRecord = document.metadata;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Title goes here'),
+        /// To get a positional field (a field without a name, like title),
+        /// use the getter $<num> on the record. This returns only unnamed fields.
+        title: Text(metadataRecord.$1),
       ),
-      body: const Column(
+      body: Column(
         children: [
           Center(
-            child: Text('Body goes here'),
+            /// Named fields like modified don't have a positional getter,
+            /// so you can use its name directly, like metadataRecord.modified.
+            child: Text('Last modified ${metadataRecord.modified}'),
           ),
         ],
       ),
